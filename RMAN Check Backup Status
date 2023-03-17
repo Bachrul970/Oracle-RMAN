@@ -1,0 +1,9 @@
+set linesize 500
+set pagesize 300
+col time_taken_display for a10
+select input_type, status, to_char(start_time,'dd/mm/yyyy hh24:mi') start_time, time_taken_display,
+ROUND ((input_bytes/1024/1024/1024),1)    input_size_GB,
+ROUND ((output_bytes/1024/1024/1024),1)   output_size_GB,
+output_device_type
+from v$rman_backup_job_details
+order by session_key desc;
